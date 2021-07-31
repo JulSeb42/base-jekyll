@@ -63,12 +63,12 @@
     grid-column: span $number;
 }
 
-@mixin transition($content) {
-    -webkit-transition: $content;
-    -moz-transition: $content;
-    -ms-transition: $content;
-    -o-transition: $content;
-    transition: $content;
+@mixin transition($property, $duration, $function) {
+    -webkit-transition: $property $duration $function;
+    -moz-transition: $property $duration $function;
+    -ms-transition: $property $duration $function;
+    -o-transition: $property $duration $function;
+    transition: $property $duration $function;
 }
 
 @mixin transition-timing($method) {
@@ -127,10 +127,14 @@
     transition-delay: $delay;
 }
 
+@mixin font-size($font-size) {
+    font-size: $font-size;
+}
+
 @mixin links($color, $hover) {
     color: $color;
     text-decoration: none;
-    @include transition(var(--transition-short));
+    @include transition(all, 0.2s, ease);
     @include body-bold();
 
     &:hover {
@@ -211,8 +215,8 @@ $breakpoint-mobile: 600px;
 
 /*============================================================= Dark mode =============================================================*/
 
-@mixin dark() {
-    @media (prefers-color-scheme: dark) {
+@mixin theme($theme) {
+    @media (prefers-color-scheme: $theme) {
         @content;
     }
 }
